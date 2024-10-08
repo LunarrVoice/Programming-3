@@ -1,0 +1,48 @@
+from typing import List
+
+def createAllPatterns(N: int) -> List[str]:
+    trapeziumPatterns: List[str] = []
+    
+    midpoint: int = N // 2
+    
+    stars: int = midpoint
+    
+    for i in range(midpoint + 1):
+        trapeziumPatterns.append(createPattern(stars, N))
+        stars -= 1
+        
+    stars += 1
+    
+    for i in range(midpoint):
+        stars += 1
+        trapeziumPatterns.append(createPattern(stars, N))
+        
+    return trapeziumPatterns
+    
+    
+def createPattern(stars: int, N: int) -> str:
+    dots: int = N - (stars * 2)
+    
+    newPattern: List[str] = []
+    
+    for i in range(stars):
+        newPattern.append("*")
+        
+    for i in range(dots):
+        newPattern.append(".")
+        
+    for i in range(stars):
+        newPattern.append("*")
+       
+    return "".join(newPattern)
+    
+    
+N = 19
+
+generatedTrapeziumPatterns: List[str] = createAllPatterns(N)
+
+for pattern in generatedTrapeziumPatterns:
+    print(pattern)
+
+
+    
