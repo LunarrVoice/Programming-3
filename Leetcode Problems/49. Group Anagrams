@@ -1,0 +1,31 @@
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        letter_dicts: Dict[int, Dict[str, int]] = {}
+
+        for index in range(len(strs)):
+            temp_dict: Dict[str, int] = {}
+
+            for letter in strs[index]:
+                temp_dict[letter] = temp_dict.get(letter, 0) + 1
+
+            letter_dicts[index] = temp_dict
+
+        group_check: Dict[Tuple(str, int), int] = {}
+        grouped_anagrams: List[List[str]] = []
+
+        for index, letter_dict in letter_dicts.items():
+            letter_tuple: Tuple(str, int) = tuple(sorted(letter_dict.items()))
+
+            if letter_tuple in group_check.keys():
+                grouped_anagrams[group_check[letter_tuple]].append(strs[index])
+            else:
+                grouped_anagrams.append([strs[index]])
+                group_check[letter_tuple] = len(grouped_anagrams) - 1
+
+        return grouped_anagrams
+                
+
+            
+            
+
+        
