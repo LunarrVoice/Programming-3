@@ -1,0 +1,14 @@
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        nums3: List[int] = nums1 + nums2
+        nums3.sort()
+
+        # median index 
+        midpoint: float = (len(nums3) + 1) / 2
+        # correct for zero-based indexing
+        midpoint -= 1
+
+        if midpoint % 1 == 0.5:
+            return (nums3[int(midpoint)] + nums3[int(midpoint) + 1]) / 2
+        else:
+            return nums3[int(midpoint)]
